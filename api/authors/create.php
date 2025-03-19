@@ -1,7 +1,7 @@
 <?php
 
-include_once '../config/Database.php';
-include_once '../models/Author.php';
+include_once '../../config/Database.php';
+include_once '../../models/Author.php';
 
 // Initialize the database connection
 $database = new Database();
