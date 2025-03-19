@@ -2,7 +2,6 @@
     
     class Database {
         private $host;
-        private $port;
         private $dbname;
         private $username;
         private $password;
@@ -13,7 +12,6 @@
             $this->password = getenv('PASSWORD');
             $this->dbname = getenv('DBNAME');
             $this->host = getenv('HOST');
-            $this->port = getenv('PORT');
         }
 
         public function connect() {
@@ -21,7 +19,7 @@
                 return $this->conn;
             } else {
 
-                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};";
+                $dsn = "pgsql:host={$this->host};dbname={$this->dbname};";
 
 
             try{
