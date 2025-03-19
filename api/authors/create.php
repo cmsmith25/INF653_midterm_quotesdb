@@ -1,33 +1,31 @@
 <?php
 
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+include_once '../config/Database.php';
+include_once '../models/Author.php';
 
-include_once '../../config/Database.php';
-include_once '../../models/Author.php';
-
-
-//Instantiate DB & connect
+// Initialize the database connection
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate Author object
+// Initialize the model
 $author = new Author($db);
 
-//Get raw author data
-$data = json_decode(file_get_contents("php://input"));
+// Check the request method
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get raw POST data
+    $data = json_decode(file_get_contents("php://input"), true);
 
-$author->author = $data->author;
-
-//Create author
-if ($author->create()) {
-    echo json_encode(
-    array('message' => 'Author Created')
-);
+    // Ensure data is valid
+    if (isset($data['author'])) {
+        // Call the create method
+        if ($author->create($data)) {
+            echo json_encode(["message" => "Author created successfully."]);
+        } else {
+            echo json_encode(["message" => "Unable to create author."]);
+        }
+    } else {
+        echo json_encode(["message" => "Invalid data."]);
+    }
 } else {
-    echo json_encode(
-        array('message' => 'Author Not Created')
-    );
+    echo json_encode(["message" => "Only POST method is allowed."]);
 }
