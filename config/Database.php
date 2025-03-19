@@ -2,7 +2,7 @@
     
     class Database {
         private $host;
-        private $port =;
+        private $port;
         private $dbname;
         private $username;
         private $password;
