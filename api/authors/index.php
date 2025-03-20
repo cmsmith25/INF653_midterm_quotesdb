@@ -2,20 +2,29 @@
 
 
 header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
-    $method = $_SERVER['REQUEST_METHOD'];
+header('Content-Type: application/json');
+$method = $_SERVER['REQUEST_METHOD'];
 
-
+    //Will handle CORS
     if ($method === 'OPTIONS') {
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
 
+    //Will get the HTTP method
+    $method = $_SERVER['REQUEST_METHOD'];
+
+
     switch ($method) {
         case 'GET':
-            // Include the read or read_single file based on the request
-            include_once 'authors/read.php';
+            //Is the request for all or a single record?
+            if (isset($_GET['id'])) {
+                // Include the read or read_single file based on the request
+                include_once 'authors/read_single.php';
+            } else {
+                include_once 'authors/read.php';
+            }
             break;
         case 'POST':
             // Include the create file

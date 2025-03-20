@@ -17,17 +17,24 @@ $db = $database->connect();
 $author = new Author($db);
 
 //Get ID
-$author->id = isset($_GET['id']) ? $_GET['id'] : die();
+$id = isset($_GET['id']) ? $_GET['id'] : die();
 
-//Get author
-$author->read_single();
 
-//Create array
-$author_arr = array(
-    'id' => $author->id,
-    'author' => $author->author
-);
+//Check if an ID has been provided
+if ($id) {
+    //Method to fetch a single author
+    $stmt = $author->read_single($id);
 
-//Make JSON
-print_r(json_encode($author_arr));
+    if ($stmt->rowCount() > 0) {
+        //Returns data
+        $author_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo json_encode($author_data);
+    } else {
+        //If no record is found for ID
+        echo json_encode(["message" => "Author not found."]);
+    }
+} else { 
+    //If ID is not provided 
+    echo json_encode(["message" => "Author ID is required."]);
+}
 
