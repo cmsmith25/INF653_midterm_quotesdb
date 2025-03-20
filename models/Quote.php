@@ -63,8 +63,8 @@ public function read_single() {
         LEFT JOIN
             authors a ON q.author_id = a.id
         WHERE
-         q.id = ?
-        LIMIT 1';
+         q.id = ?';
+
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -77,14 +77,16 @@ public function read_single() {
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-         //Set Properties
-        $this->id = $row['id'];
-        $this->quote = $row['quote'];
-        $this->category_id = $row['category_id'];
-        $this->author_id = $row['author_id'];
-
+        if (!$row) {
+            return false;
     }
+        return array(
+            'id' => $row['id'],
+            'quote' => $row['quote'],
+            'author' => $row['author'],
+            'category' => $row['category']
+        );
+}
 
 
     //Create quote

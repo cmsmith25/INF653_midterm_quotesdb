@@ -16,16 +16,14 @@ $db = $database->connect();
 $quote = new Quote($db);
 
 //Get ID
-$quote->id = isset($_GET['id']) ? $_GET['id'] : die();
+$id = isset($_GET['id']) ? $_GET['id'] : die(json_encode(["message" => "Missing ID parameter"]));
 
-//Get category
-$quote->read_single();
+$quote->id = $id;
 
-//Create array
-$quote_arr = array(
-    'id' => $quote->id,
-    'quote' => $quote->quote
-);
+$result = $quote->read_single();
 
-//Make JSON
-print_r(json_encode($quote_arr));
+if($result) {
+    echo json_encode($result);
+} else {
+    echo json_encode(["message" => "Quote not found"]);
+}
