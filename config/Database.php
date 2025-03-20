@@ -6,6 +6,7 @@
         private $username;
         private $password;
         private $conn;
+        private $port = 5432;
 
         public function __construct() {
             $this->username = getenv('USERNAME');
@@ -19,7 +20,7 @@
                 return $this->conn;
             } else {
 
-                $dsn = "pgsql:host={$this->host};dbname={$this->dbname};";
+                $dsn = "pgsql:host={$this->host};dbname={$this->dbname};port={$this->port};";
 
 
             try{

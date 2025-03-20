@@ -20,7 +20,7 @@ $author = new Author($db);
 $data = json_decode(file_get_contents("php://input"), true);
 
 
-$author->author = $data->author;
+$author->author = $data['author'];
 
 //Create author
 if ($author->create()) {
