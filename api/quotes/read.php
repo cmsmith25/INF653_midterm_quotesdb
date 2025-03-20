@@ -18,24 +18,18 @@ include_once '../../models/Quote.php';
  //Get quotes
  $result = $quote->read();
 
- // Get row count
- $num = $result->rowCount();
-
  //Check if any quotes found
- if ($num > 0) {
+ if (!empty($result)) {
     $quotes_arr = array();
     $quotes_arr['data'] = array();
-
-    //Loops through the array of quotes
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        extract($row);
     
 
+    foreach ($result as $row) {
         $quote_item = array(
-            'id' => $id,
-            'quote' => $quote,
-            'author' => $author,
-            'category' => $category
+            'id' => $row['$id'],
+            'quote' => $row['quote'],
+            'author' => $row['author'],
+            'category' => $row['category']
         );
 
         //Push data to the array
@@ -43,9 +37,9 @@ include_once '../../models/Quote.php';
     }
 
     //Turn to JSON
-    echo json_encode($quotes_arr);
+    echo json_encode($quotes_arr['data']);
 
  } else {
-    echo json_encode(array('data' => []));
+    echo json_encode(array());
 
  }
