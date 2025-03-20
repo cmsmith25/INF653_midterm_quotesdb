@@ -20,7 +20,7 @@ $author = new Author($db);
 $data = json_decode(file_get_contents("php://input"), true);
 
 // Checks to see if data is valid
-if (isset($data['author']['author'])) {
+if (isset($data['author']['author']) && !empty($data['author']['author'])) {
     // Call the create method
     if ($author->create($data)) {
          echo json_encode(["message" => "Author created successfully."]);
