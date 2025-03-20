@@ -12,7 +12,7 @@ include_once '../../models/Quote.php';
  $database = new Database();
  $db = $database->connect();
 
- //Instantiate category object
+ //Instantiate Quote model
  $quote = new Quote($db);
 
  //Category query

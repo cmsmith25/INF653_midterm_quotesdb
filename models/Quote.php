@@ -43,7 +43,12 @@ class Quote {
    //Execute query
    $stmt->execute();
 
-   return $stmt;
+   $quotes = [];
+   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $quotes[] = $row; //Adds each quote to an array
+   }
+
+   return $quotes;
 }
 
 //Get a single quote
