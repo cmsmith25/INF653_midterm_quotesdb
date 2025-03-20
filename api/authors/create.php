@@ -19,14 +19,16 @@ $author = new Author($db);
 // Get raw POST data
 $data = json_decode(file_get_contents("php://input"), true);
 
-// Checks to see if data is valid
-if (isset($data['author']['author']) && !empty($data['author']['author'])) {
-    // Call the create method
-    if ($author->create($data)) {
-         echo json_encode(["message" => "Author created successfully."]);
-    } else {
-        echo json_encode(["message" => "Unable to create author."]);
-    }
+
+$author->author = $data->author;
+
+//Create author
+if ($author->create()) {
+    echo json_encode(
+    array('message' => 'Author Created')
+);
 } else {
-     echo json_encode(["message" => "Invalid data."]);
+    echo json_encode(
+        array('message' => 'Author Not Created')
+    );
 }
