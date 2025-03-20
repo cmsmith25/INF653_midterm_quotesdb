@@ -27,7 +27,7 @@ include_once '../../models/Quote.php';
     $quotes_arr['data'] = array();
 
     //Loops through the array of quotes
-    foreach ($result as $row) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
     
 
@@ -38,7 +38,7 @@ include_once '../../models/Quote.php';
             'author_id' => $author_id
         );
 
-        //Push to "data"
+        //Push data to the array
         array_push($quotes_arr['data'], $quote_item);
     }
 
@@ -47,7 +47,7 @@ include_once '../../models/Quote.php';
 
  } else {
     echo json_encode(
-        array('message' => 'No Quotes Found')
+        array('data' => [])
     );
 
  }
