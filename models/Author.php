@@ -54,16 +54,18 @@ class Author {
         $stmt = $this->conn->prepare($query);
         
         //Bind ID
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $id);
 
         //Execute query
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-         //Set Properties
-        $this->id = $row['id'];
-        $this->author = $row['author'];
+
+        if ($row) {
+            return $row;
+        } else {
+            return false; //If no result is found
+        }
 
     }
 

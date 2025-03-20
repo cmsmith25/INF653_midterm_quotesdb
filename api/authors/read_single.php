@@ -23,11 +23,9 @@ $id = isset($_GET['id']) ? $_GET['id'] : die();
 //Check if an ID has been provided
 if ($id) {
     //Method to fetch a single author
-    $stmt = $author->read_single($id);
+    $author_data = $author->read_single($id);
 
-    if ($stmt->rowCount() > 0) {
-        //Returns data
-        $author_data = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($author_data) {
         echo json_encode($author_data);
     } else {
         //If no record is found for ID

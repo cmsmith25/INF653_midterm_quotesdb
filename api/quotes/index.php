@@ -9,11 +9,7 @@ $method = $_SERVER['REQUEST_METHOD'];
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
     }
-
-    include_once 'Database.php';
-    include_once 'Quote.php';
-
-        
+    
     
     //Will get the HTTP method
     $method = $_SERVER['REQUEST_METHOD'];

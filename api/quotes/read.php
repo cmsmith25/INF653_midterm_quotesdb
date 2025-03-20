@@ -19,15 +19,17 @@ include_once '../../models/Quote.php';
  $result = $quote->read();
 
  // Get row count
- $num = $result->rowCount();
+ $num = count($result);
 
  //Check if any authors
  if ($num > 0) {
     $quotes_arr = array();
     $quotes_arr['data'] = array();
 
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    //Loops through the array of quotes
+    foreach ($result as $row) {
         extract($row);
+    
 
         $quote_item = array(
             'id' => $id,
