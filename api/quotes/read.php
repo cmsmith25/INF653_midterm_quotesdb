@@ -25,9 +25,8 @@ include_once '../../models/Quote.php';
     
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
-        if (isset($row['id']) &&isset($row['quote']) && isset($row['author']) && isset($row['category'])) {
+        if (isset($row['quote'], $row['author'], $row['category'])) {
         $quote_item = array(
-            'id' => $row['$id'],
             'quote' => $row['quote'],
             'author' => $row['author'],
             'category' => $row['category']
@@ -35,13 +34,18 @@ include_once '../../models/Quote.php';
 
         //Push data to the array
         array_push($quotes_arr['data'], $quote_item);
-        }
+        } else {
 
-    //Turn to JSON
-    echo json_encode($quotes_arr);
+        }
+    }
+        
+
+        //Turn to JSON
+        echo json_encode($quotes_arr);
+
 
  } else {
     echo json_encode(array('data' => []));
 
  }
-}
+
