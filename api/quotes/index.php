@@ -13,77 +13,36 @@ header('Access-Control-Allow-Origin: *');
         exit();
     }
 
-        //Create a DB connection
-        $database = new Database();
-        $db = $database->connect();
+        
     
-        //Instantiate Author model
-        $quote = new Quote($db);
-    
-        //Handle Get request
-        if ($method === 'GET') {
+    //Will get the HTTP method
+    $method = $_SERVER['REQUEST_METHOD'];
+
+
+    switch ($method) {
+        case 'GET':
+            //Is the request for all or a single record?
             if (isset($_GET['id'])) {
-                $quote->id = $_GET['id'];
-                $quote_data = $quote->getSingleQuote();
-    
-                if($quote_data) {
-                    echo json_encode($quote_data);
-                } else {
-                    echo json_encode(["message" => "Quote not found"]);
+                // Include the read or read_single file based on the request
+                include_once 'quotes/read_single.php';
             } else {
-                $quote_data = $quote->getAllQuotes();
+                include_once 'quotes/read.php';
             }
-        }
-    
-        elseif ($method === 'POST') {
-            $data = json_decode(file_get_contents("php://input"));
-
-            if (!empty($data->author) && !empty($data->text)) {
-                $quote->author = $data->author;
-                $quote->text = $data->text;
-
-                if($quote->create()) {
-                    echo json_encode(["message" => "Quote Created Successfully"]);
-                } else {
-                    echo json_encode(["message" => "Failed to create quote"]);
-                }
-            } else {
-                echo json_encode(["message"] => "Incomplete data");
-                }
-            }
-
-        // Handle PUT request (update a quote)
-        elseif ($method === 'PUT') {
-            $data = json_decode(file_get_contents("php://input"));
-
-            if (isset($data->id) && !empty($data->author) && !empty($data->text)) {
-                $quote->id = $data->id;
-                $quote->author = $data->author;
-                $quote->text = $data->text;
-
-                if ($quote->update()) {
-                    echo json_encode(["message" => "Quote updated successfully"]);
-                } else {
-                    echo json_encode(["message" => "Failed to update quote"]);
-                }
-        } else {
-            echo json_encode(["message" => "Incomplete data"]);
-        }
+            break;
+        case 'POST':
+            // Include the create file
+            include_once 'quotes/create.php';
+            break;
+        case 'PUT':
+            // Include the update file
+            include_once 'quotes/update.php';
+            break;
+        case 'DELETE':
+            // Include the delete file
+            include_once 'quotes/delete.php';
+            break;
+        default:
+            echo json_encode(["message" => "Request method not allowed."]);
+            break;
     }
-
-        // Handle DELETE request
-        elseif ($method === 'DELETE') {
-            $data = json_decode(file_get_contents("php://input"));
-
-            if (isset($data->id)) {
-                $quote->id = $data->id;
-
-                if ($quote->delete()) {
-                    echo json_encode(["message" => "Quote deleted successfully"]);
-                } else {
-                  echo json_encode(["message" => "Failed to delete quote"]);
-                }
-        } else {
-            echo json_encode(["message" => "Missing quote ID"]);
-    }
-}
+        
