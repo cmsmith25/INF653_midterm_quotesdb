@@ -15,13 +15,13 @@ include_once '../../models/Quote.php';
  //Instantiate Quote model
  $quote = new Quote($db);
 
- //Category query
+ //Get quotes
  $result = $quote->read();
 
  // Get row count
- $num = count($result);
+ $num = $result->rowCount();
 
- //Check if any authors
+ //Check if any quotes found
  if ($num > 0) {
     $quotes_arr = array();
     $quotes_arr['data'] = array();
