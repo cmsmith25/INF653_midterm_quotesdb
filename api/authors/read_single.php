@@ -20,19 +20,15 @@ $author = new Author($db);
 $id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-//Check if an ID has been provided
-if ($id) {
-    //Method to fetch a single author
-    $author_data = $author->read_single($id);
+$author->id = $id;
+$author_data = $author->read_single();
+
 
     if ($author_data) {
         echo json_encode($author_data);
     } else {
         //If no record is found for ID
-        echo json_encode(["message" => "Author not found."]);
+        echo json_encode(["message" => "author_id Not Found"]);
     }
-} else { 
-    //If ID is not provided 
-    echo json_encode(["message" => "Author ID is required."]);
-}
+
 
