@@ -25,7 +25,8 @@ class Quote {
             q.id,
             q.quote,
             q.category_id,
-            q.author_id
+            c.category_name AS category,
+            a.author_name AS author
             FROM
               ' . $this->table . ' q
             LEFT JOIN

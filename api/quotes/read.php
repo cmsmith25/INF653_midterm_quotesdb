@@ -34,8 +34,8 @@ include_once '../../models/Quote.php';
         $quote_item = array(
             'id' => $id,
             'quote' => $quote,
-            'category_id' => $category_id,
-            'author_id' => $author_id
+            'author' => $author,
+            'category' => $category
         );
 
         //Push data to the array
@@ -46,8 +46,6 @@ include_once '../../models/Quote.php';
     echo json_encode($quotes_arr);
 
  } else {
-    echo json_encode(
-        array('data' => [])
-    );
+    echo json_encode(array('data' => []));
 
  }
