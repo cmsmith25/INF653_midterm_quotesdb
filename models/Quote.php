@@ -25,8 +25,8 @@ class Quote {
             q.id,
             q.quote,
             q.category_id,
-            c.category_name AS category,
-            a.author_name AS author
+            c.category AS category,
+            a.author AS author
             FROM
               ' . $this->table . ' q
             LEFT JOIN
@@ -54,7 +54,8 @@ public function read_single() {
         q.id,
         q.quote,
         q.category_id,
-        q.author_id
+        c.category AS category,
+        a.author AS author
         FROM
         ' . $this->table . ' q
         LEFT JOIN
