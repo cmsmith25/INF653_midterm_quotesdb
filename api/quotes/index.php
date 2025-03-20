@@ -24,22 +24,22 @@ $method = $_SERVER['REQUEST_METHOD'];
             //Is the request for all or a single record?
             if (isset($_GET['id'])) {
                 // Include the read or read_single file based on the request
-                include_once 'quotes/read_single.php';
+                require_once 'read_single.php';
             } else {
-                include_once 'quotes/read.php';
+                require_once 'read.php';
             }
             break;
         case 'POST':
             // Include the create file
-            include_once 'quotes/create.php';
+            require_once 'create.php';
             break;
         case 'PUT':
             // Include the update file
-            include_once 'quotes/update.php';
+            require_once 'update.php';
             break;
         case 'DELETE':
             // Include the delete file
-            include_once 'quotes/delete.php';
+            require_once 'delete.php';
             break;
         default:
             echo json_encode(["message" => "Request method not allowed."]);
