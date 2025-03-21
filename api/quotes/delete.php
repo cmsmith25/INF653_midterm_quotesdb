@@ -22,12 +22,13 @@ $quote->id = $id;
 
 //Delete the quote
 if ($quote->delete()) {
-    echo json_encode(
-    array("message" => "Quote deleted successfully")
+    echo json_encode(array(
+        'id' => $id)
 );
 
 } else {
     echo json_encode(
-        array("message" => "No Quotes Found")
-    );
+        array('message' => 'No Quotes Found',
+        'id' => $id
+    ));
 }
