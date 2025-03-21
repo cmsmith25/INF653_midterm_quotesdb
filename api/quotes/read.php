@@ -16,37 +16,28 @@ include_once '../../models/Quote.php';
  $quote = new Quote($db);
 
  //Get quotes
- $result = $quote->read();
+ $stmt = $quote->read();
 
  //Check if any quotes found
- if (!empty($result)) {
+ if ($stmt->rowCount() >0) {
     $quotes_arr = array();
     $quotes_arr['data'] = array();
     
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
 
-        if (isset($row['id'], $row['quote'], $row['author'], $row['category'])) {
         $quote_item = array(
-            'id' => $row['id'],
-            'quote' => $row['quote'],
-            'author' => $row['author'],
-            'category' => $row['category']
+            'id' => $id,
+            'quote' => $quote,
+            'author' => $author,
+            'category' => $category
         );
 
         //Push data to the array
         array_push($quotes_arr['data'], $quote_item);
-        } else {
-
         }
-    }
-        
-
-        //Turn to JSON
         echo json_encode($quotes_arr);
 
-
- } else {
-    echo json_encode(array('data' => []));
-
- }
-
+    } else {
+        echo json_encode(array("id" => $id, "message" => "No Quotes Found"));
+    }
