@@ -20,8 +20,7 @@ $author = new Author($db);
 $id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$author->id = $id;
-$author_data = $author->read_single();
+$author_data = $author->read_single($id);
 
 
     if ($author_data) {
