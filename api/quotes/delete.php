@@ -27,8 +27,8 @@ if ($quote->delete()) {
 );
 
 } else {
-    echo json_encode(
-        array('message' => 'No Quotes Found',
+    echo json_encode(array(
+        'message' => 'No Quotes Found',
         'id' => $id
     ));
 }

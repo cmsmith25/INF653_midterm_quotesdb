@@ -6,7 +6,7 @@
         private $username;
         private $password;
         private $conn;
-        private $port = 5432;
+        //private $port = 5432;
 
         public function __construct() {
             $this->username = getenv('USERNAME');
