@@ -25,8 +25,9 @@ include_once '../../models/Quote.php';
     
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
-        if (isset($row['quote'], $row['author'], $row['category'])) {
+        if (isset($row['id'], $row['quote'], $row['author'], $row['category'])) {
         $quote_item = array(
+            'id' => $row['id'],
             'quote' => $row['quote'],
             'author' => $row['author'],
             'category' => $row['category']
