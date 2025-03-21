@@ -16,11 +16,15 @@ $db = $database->connect();
 $author = new Author($db);
 
 //Get ID
-$author->id = isset($_GET['id']) ? $_GET['id'] : die();
+$author->id = isset($_GET['id']) ? $_GET['id'] : null;
 
+$author_data = null;
 
-$author_data = $author->read_single();
-
+if ($author->id) {
+    $author_data = $author->read_single();
+} else {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+}
 
 if ($author_data) {
     echo json_encode($author_data);
