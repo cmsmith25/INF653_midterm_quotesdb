@@ -47,6 +47,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
     );
 
  }
+?>
 
 
 

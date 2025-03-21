@@ -1,12 +1,12 @@
 <?php
     
     class Database {
+        private $conn;
         private $host;
+        private $port = 5432;
         private $dbname;
         private $username;
         private $password;
-        private $conn;
-        private $port = 5432;
 
         public function __construct() {
             $this->username = getenv('USERNAME');
@@ -20,12 +20,11 @@
                 return $this->conn;
             } else {
 
-                $dsn = "pgsql:host={$this->host};dbname={$this->dbname};port={$this->port};";
+                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};";
 
 
             try{
                 $this->conn = new PDO($dsn, $this->username, $this->password);
-
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $this->conn;
             } catch(PDOException $e) {

@@ -29,5 +29,6 @@ $author_data = $author->read_single($id);
         //If no record is found for ID
         echo json_encode(["message" => "author_id Not Found"]);
     }
+?>
 
 

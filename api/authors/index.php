@@ -40,4 +40,5 @@ $method = $_SERVER['REQUEST_METHOD'];
             echo json_encode(["message" => "Request method not allowed."]);
             break;
     }
+    ?>
     
