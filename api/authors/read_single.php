@@ -2,8 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 
 include_once '../../config/Database.php';
 include_once '../../models/Author.php';
@@ -17,13 +16,17 @@ $db = $database->connect();
 $author = new Author($db);
 
 //Get ID
-$id = isset($_GET['id']) ? $_GET['id'] : die();
+$author->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 
-$author_data = $author->read_single($id);
+$author_data = $author->read_single();
 
 
     if ($author_data) {
+        $author_arr = array(
+            'id' => $author->id,
+            'author' => $author->author
+        );
         echo json_encode($author_data);
     } else {
         //If no record is found for ID

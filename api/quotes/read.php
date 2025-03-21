@@ -38,7 +38,7 @@ include_once '../../models/Quote.php';
         }
         
         foreach ($quotes_arr['data'] as $quote) {
-            echo json_encode($quote) . "\n";
+            echo json_encode($quote);
         }
 
     } else {

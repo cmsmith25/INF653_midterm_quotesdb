@@ -40,7 +40,7 @@ class Author {
 }
 
     //Get a single author
-    public function read_single($id) {
+    public function read_single() {
         //Create query
         $query = 'SELECT
         a.id,
