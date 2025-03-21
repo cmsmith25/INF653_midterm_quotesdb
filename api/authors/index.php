@@ -12,8 +12,6 @@ $method = $_SERVER['REQUEST_METHOD'];
         exit();
     }
 
-    //Will get the HTTP method
-    $method = $_SERVER['REQUEST_METHOD'];
 
 
     switch ($method) {

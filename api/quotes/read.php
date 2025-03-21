@@ -36,8 +36,11 @@ include_once '../../models/Quote.php';
         //Push data to the array
         array_push($quotes_arr['data'], $quote_item);
         }
-        echo json_encode($quotes_arr);
+        
+        foreach ($quotes_arr['data'] as $quote) {
+            echo json_encode($quote) . "\n";
+        }
 
     } else {
-        echo json_encode(array("id" => $id, "message" => "No Quotes Found"));
+        echo json_encode(array("message" => "No Quotes Found"));
     }
