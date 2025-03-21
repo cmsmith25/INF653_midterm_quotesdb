@@ -22,16 +22,12 @@ $author->id = isset($_GET['id']) ? $_GET['id'] : die();
 $author_data = $author->read_single();
 
 
-    if ($author_data) {
-        $author_arr = array(
-            'id' => $author->id,
-            'author' => $author->author
-        );
-        echo json_encode($author_data);
-    } else {
-        //If no record is found for ID
-        echo json_encode(["message" => "author_id Not Found"]);
-    }
+if ($author_data) {
+    echo json_encode($author_data);
+} else {
+    //If no record is found for ID
+    echo json_encode(["message" => "author_id Not Found"]);
+}
 ?>
 
 

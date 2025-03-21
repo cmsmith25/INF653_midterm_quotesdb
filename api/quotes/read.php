@@ -21,7 +21,6 @@ include_once '../../models/Quote.php';
  //Check if any quotes found
  if ($stmt->rowCount() >0) {
     $quotes_arr = array();
-    $quotes_arr['data'] = array();
     
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
@@ -34,12 +33,11 @@ include_once '../../models/Quote.php';
         );
 
         //Push data to the array
-        array_push($quotes_arr['data'], $quote_item);
+        array_push($quotes_arr, $quote_item);
         }
         
-        foreach ($quotes_arr['data'] as $quote) {
-            echo json_encode($quote);
-        }
+        echo json_encode($quotes_arr);
+        
 
     } else {
         echo json_encode(array("message" => "No Quotes Found"));

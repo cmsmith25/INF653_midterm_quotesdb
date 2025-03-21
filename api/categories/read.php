@@ -25,7 +25,6 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
  //Check if any authors
  if($num > 0) {
     $categories_arr = array();
-    $categories_arr['data'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
@@ -36,7 +35,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
         );
 
         //Push to "data"
-        array_push($categories_arr['data'], $category_item);
+        array_push($categories_arr, $category_item);
     }
 
     //Turn to JSON

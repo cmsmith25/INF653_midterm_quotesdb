@@ -2,8 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 
 include_once '../../config/Database.php';
 include_once '../../models/Category.php';
@@ -20,13 +19,14 @@ $category = new Category($db);
 $category->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 //Get category
-$category->read_single();
+$category_data->read_single($id);
 
-//Create array
-$category_arr = array(
-    'id' => $category->id,
-    'category' => $category->category
-);
+if ($category_data) {
+    echo json_encode($category_data);
+} else {
+    //If no record is found for ID
+    echo json_encode(["message" => "category_id Not Found"]);
+}
 
 //Make JSON
 print_r(json_encode($category_arr));
