@@ -15,26 +15,19 @@ $db = $database->connect();
 //Instantiate Quote object
 $quote = new Quote($db);
 
-//Get raw quote data
-$data = json_decode(file_get_contents("php://input"));
+$id = isset($_GET['id']) ? $_GET['id'] : die ();
 
-//Check if the id is provided
-if (isset($data->id)) {
-//Set ID to delete
-$quote->id = $data->id;
+//Set the ID
+$quote->id = $id;
 
-//Delete quote
+//Delete the quote
 if ($quote->delete()) {
     echo json_encode(
-        array('message' => 'Quote Deleted')
-    );
+    array("message" => "Quote deleted successfully")
+);
+
 } else {
     echo json_encode(
-        array('message' => 'Quote Not Deleted')
+        array("message" => "No Quotes Found")
     );
 }
-} else {
-    //Handles case if id is not provided
-    echo json_encode(
-        array('message' => 'ID not provided for delete'));
-    }

@@ -184,15 +184,14 @@ public function read_single() {
 
         //Execute query
         if ($stmt->execute()) {
+            if ($stmt->rowCount() > 0) {
             return true;
         }
-
-        //Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
+        }
 
         return false;
     }
-}
+
 
 
 
