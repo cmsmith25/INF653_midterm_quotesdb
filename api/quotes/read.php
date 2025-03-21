@@ -29,8 +29,8 @@ include_once '../../models/Quote.php';
         $quote_item = array(
             'id' => $id,
             'quote' => $quote,
-            'author' => $author,
-            'category' => $category
+            'author_id' => $author_id,
+            'category_id' => $category_id
         );
 
         //Push data to the array
