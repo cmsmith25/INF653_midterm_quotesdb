@@ -28,8 +28,8 @@ include_once '../../models/Quote.php';
         $quote_item = array(
             'id' => $id,
             'quote' => $quote,
-            'author' => $author,
-            'category' => $category
+            'author' => $author_id,
+            'category' => $category_id
         );
 
         //Push data to the array
