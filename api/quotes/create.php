@@ -17,12 +17,11 @@ $quote = new Quote($db);
 
 //Get raw quote data
 $data = json_decode(file_get_contents("php://input"));
-
-if (!empty($data->quote) && is_numeric($data->category_id) && is_numeric($data->author_id)) {    
+    
 //Set the properties of quote
 $quote->quote = $data->quote;
-$quote->category_id = (int) $data->category_id;
-$quote->author_id = (int) $data->author_id;
+$quote->category_id = $data->category_id;
+$quote->author_id = $data->author_id;
 
 //Create quote
 if ($quote->create()) {
@@ -30,7 +29,4 @@ if ($quote->create()) {
 } else {
     echo json_encode(
         array('message' => 'author_id Not Found'));
-}
-} else {
-    echo json_encode(array('message' => 'Invalid data input'));
 }
