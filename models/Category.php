@@ -5,7 +5,6 @@ class Category {
     private $conn;
     private $table = 'categories';
 
-
     //Category properties
     public $id;
     public $category;
@@ -26,7 +25,6 @@ class Category {
             ORDER BY
             c.id DESC';
             
-
     //Prepare statement
    $stmt = $this->conn->prepare($query);
 

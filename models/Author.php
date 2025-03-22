@@ -5,13 +5,10 @@ class Author {
     private $conn;
     private $table = 'authors';
 
-
     //Author properties
     public $id;
     public $author;
    
-
-
     //Constructor with DB
     public function __construct($db) {
         $this->conn = $db;
@@ -28,8 +25,6 @@ class Author {
             ORDER BY
             a.id DESC';
     
-    
-            
     //Prepare statement
    $stmt = $this->conn->prepare($query);
    
@@ -78,7 +73,8 @@ class Author {
     //Create author
     public function create() {
         //Create query
-        $query = 'INSERT INTO ' . $this->table . ' (author) VALUES (:author)';
+        $query = 'INSERT INTO ' . $this->table . '
+        (author) VALUES (:author)';
             
         //Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -92,7 +88,7 @@ class Author {
         //Execute query
         if ($stmt->execute()) {
             return true;
-        }
+        } else {
 
         //Print error if something goes wrong
         printf("Error: %s.\n", $stmt->error);
@@ -126,7 +122,6 @@ class Author {
        //Execute query
         if($stmt->execute()) {
             return true;
-    
         } else {
 
         //Print error if something goes wrong
@@ -166,6 +161,7 @@ class Author {
 
         return false;
     }
+}
 }
 
 
