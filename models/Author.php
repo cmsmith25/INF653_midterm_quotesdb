@@ -42,11 +42,11 @@ class Author {
     //Get a single author
     public function read_single() {
         //Create query
-        $query = 'SELECT id, author
+        $query = 'SELECT a.id, a.author
         FROM
-        ' . $this->table . '
+        ' . $this->table . ' a
         WHERE
-            id = ?';
+            a.id = ?';
         
         //Prepare statement
         $stmt = $this->conn->prepare($query);
