@@ -42,7 +42,9 @@ class Author {
     //Get a single author
     public function read_single() {
         //Create query
-        $query = 'SELECT a.id, a.author
+        $query = 'SELECT
+        a.id,
+        a.author
         FROM
         ' . $this->table . ' a
         WHERE
@@ -52,7 +54,7 @@ class Author {
         $stmt = $this->conn->prepare($query);
         
         //Bind ID
-        $stmt->bindParam(1, $this->$id);
+        $stmt->bindParam(1, $this->id);
 
         //Execute query
         $stmt->execute();
