@@ -31,4 +31,3 @@ if($author->delete()) {
         array('message' => 'Author Not Deleted')
     );
 }
-?>

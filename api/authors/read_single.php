@@ -32,6 +32,6 @@ if ($author_data) {
     //If no record is found for ID
     echo json_encode(["message" => "author_id Not Found"]);
 }
-?>
+
 
 

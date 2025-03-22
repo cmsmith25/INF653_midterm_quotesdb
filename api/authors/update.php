@@ -36,4 +36,3 @@ if($author->update()) {
         array("message" => "Author Not Updated")
     );
 }
-?>
