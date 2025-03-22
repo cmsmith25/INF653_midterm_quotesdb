@@ -21,9 +21,6 @@ $data = json_decode(file_get_contents("php://input"));
 
 //Set ID to update
 $category->id = $data->id;
-
-
-$category->id = $data->id;
 $category->category = $data->category;
 
 //Update category

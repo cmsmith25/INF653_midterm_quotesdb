@@ -29,7 +29,7 @@ if ($quote->create()) {
     echo json_encode(array('message' => 'Quote Created'));
 } else {
     echo json_encode(
-        array('message' => 'Quote Not Created'));
+        array('message' => 'author_id Not Found'));
 }
 } else {
     echo json_encode(array('message' => 'Invalid data input'));

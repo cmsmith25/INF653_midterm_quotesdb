@@ -18,17 +18,17 @@ $db = $database->connect();
 $category = new Category($db);
 
 //Get ID
-$category->id = isset($_GET['id']) ? $_GET['id'] : die();
+$id = isset($_GET['id']) ? $_GET['id'] : die(json_encode(["message" => "Missing ID Parameter"]));
+
+$category->id = $id;
 
 //Get category
-$category_data->read_single($id);
+$result = $category->read_single();
 
-if ($category_data) {
-    echo json_encode($category_data);
+if ($result) {
+    echo json_encode($result);
 } else {
     //If no record is found for ID
     echo json_encode(["message" => "category_id Not Found"]);
 }
 
-//Make JSON
-print_r(json_encode($category_arr));

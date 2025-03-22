@@ -52,7 +52,7 @@ public function read_single() {
     $query = 'SELECT
         q.id,
         q.quote,
-        /*q.category_id,*/
+        q.category_id,
         c.category AS category,
         a.author AS author
         FROM
