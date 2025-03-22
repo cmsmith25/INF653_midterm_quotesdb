@@ -25,11 +25,6 @@ $author->id = $id;
 //Get author
 $result = $author->read_single();
 
-/*if ($author->id) {
-    $author_data = $author->read_single();
-} else {
-    echo json_encode(array("message" => "Missing Required Parameters"));
-}*/
 
 if ($result) {
     echo json_encode($result);
