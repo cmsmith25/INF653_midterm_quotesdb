@@ -22,6 +22,7 @@ $data =json_decode(file_get_contents("php://input"));
 /*$id->id = $data['id'];
 $author->author = $data['author'];*/
 
+
 $author->id = $data->$id;
 
 /*/Create author
