@@ -25,7 +25,12 @@ $quote->author_id = $data->author_id;
 
 //Create quote
 if ($quote->create()) {
-    echo json_encode(array("message" => "Quote Created"));
+    echo json_encode(
+        array('id' => $quote-> id,
+              'quote' => $quote->quote,
+              'author_id' => $quote->author_id,
+              'category_id' => $quote->category_id,
+              'message' => 'Quote Created'));
 } else {
     echo json_encode(
         array('message' => 'author_id Not Found'));
