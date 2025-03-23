@@ -27,8 +27,8 @@ $author->author = $data->author;
 
 //Update author
 if($author->update()) {
-    echo json_encode(array("id" => "author" => "Author Updated"));
+    echo json_encode(array('id' => 'author' => 'Author Updated'));
 } else {
-    echo json_encode(array("message" => "Missing Required Parameters"));
+    echo json_encode(array('message' => 'Missing Required Parameters'));
 }
 }

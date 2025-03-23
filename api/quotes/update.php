@@ -41,3 +41,4 @@ if($quote->update()) {
     echo json_encode(
         array('message' => 'Missing Required Parameters'));
 }
+}
