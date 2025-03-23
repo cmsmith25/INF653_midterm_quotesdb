@@ -149,7 +149,7 @@ public function read_single() {
      
  
      //Bind data
-     $stmt->bindParam(':id', $this->id);
+     //$stmt->bindParam(':id', $this->id);//
      $stmt->bindParam(':quote', $this->quote);
      $stmt->bindParam(':category_id', $this->category_id);
      $stmt->bindParam(':author_id', $this->author_id);
