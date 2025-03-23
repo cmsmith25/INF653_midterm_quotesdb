@@ -15,7 +15,6 @@ $db = $database->connect();
 // Initializes the Author model
 $author = new Author($db);
 
-
 // Get raw POST data
 $data =json_decode(file_get_contents("php://input"));
 
