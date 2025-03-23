@@ -87,14 +87,11 @@ class Author {
     
         //Execute query
         if ($stmt->execute()) {
-            return array(
-                'id' => $this id,
-                'author' => $this->author
-            );
+            return true;
         } else {
 
         //Print error if something goes wrong
-        //printf("Error: %s.\n", $stmt->error);
+        printf("Error: %s.\n", $stmt->error);
 
         return false;
 
