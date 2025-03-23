@@ -18,7 +18,7 @@ $quote = new Quote($db);
 //Get raw quote data
 $data = json_decode(file_get_contents("php://input"));
 
-if (empty($data->author_id)) {
+/*if (empty($data->author_id)) {
     echo json_encode(array('message' => 'author_id Not Found'));
     exit();
 }
@@ -26,7 +26,7 @@ if (empty($data->author_id)) {
 if (empty($data_category_id)) {
     echo json_encode(array('message' => 'category_id Not Found'));
     exit();
-}
+}*/
     
 //Set the properties of quote
 $quote->quote = $data->quote;
