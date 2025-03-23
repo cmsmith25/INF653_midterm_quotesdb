@@ -38,7 +38,7 @@ if($quote->update()) {
 
 } else {
     echo json_encode(
-        array('message' => 'Quote Not Missing Required Parameters'));
+        array('message' => 'Missing Required Parameters'));
 
     }
 
