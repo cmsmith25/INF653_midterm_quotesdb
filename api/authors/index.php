@@ -23,22 +23,22 @@ $method = $_SERVER['REQUEST_METHOD'];
             } else {
                 require_once 'read.php';
             }
-            break;
+                break;
         case 'POST':
             // Include the create file
-            require_once 'create.php';
-            break;
+                require_once 'create.php';
+                break;
         case 'PUT':
             // Include the update file
-            require_once 'update.php';
-            break;
+                require_once 'update.php';
+                break;
         case 'DELETE':
             // Include the delete file
-            require_once 'delete.php';
-            break;
+                require_once 'delete.php';
+                break;
         default:
             echo json_encode(["message" => "Request method not allowed."]);
-            break;
+                break;
     }
     
     
