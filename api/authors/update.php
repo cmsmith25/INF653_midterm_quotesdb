@@ -19,16 +19,16 @@ $author = new Author($db);
 //Get raw author data
 $data = json_decode(file_get_contents("php://input"));
 
+//Ensure all data requirements available
+if (isset($data->id) && isset($data->author)){
 //Set ID to update
 $author->id = $data->id;
 $author->author = $data->author;
 
 //Update author
 if($author->update()) {
-    echo json_encode(
-    array("message" => "Author Updated")
-);
+    echo json_encode(array("id" => "author" => "Author Updated"));
 } else {
-    echo json_encode(
-        array("message" => "Missing Required Parameters"));
+    echo json_encode(array("message" => "Missing Required Parameters"));
+}
 }

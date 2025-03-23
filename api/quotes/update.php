@@ -32,11 +32,11 @@ if($quote->update()) {
     echo json_encode(
     array('message' => 'No Quotes Found')
 );
-} else {
+/*} else {
     echo json_encode(
         array('message' => 'Quote Not Updated')
     );
-}
+}*/
 } else {
     echo json_encode(
         array('message' => 'Missing Required Parameters'));
