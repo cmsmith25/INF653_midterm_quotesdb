@@ -96,6 +96,7 @@ class Category {
         return false;
 
     }
+}
 
 
     //Update category
