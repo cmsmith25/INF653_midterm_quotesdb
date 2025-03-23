@@ -96,7 +96,7 @@ class Category {
         return false;
 
     }
-}
+
 
     //Update category
     public function update() {
