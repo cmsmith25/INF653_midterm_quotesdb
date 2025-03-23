@@ -185,13 +185,13 @@ public function read_single() {
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
             return true;
-        }
-        }
-
-        return false;
+            }
+        } else {
+            return false;
     }
 }
-?>
+}
+
 
 
 
