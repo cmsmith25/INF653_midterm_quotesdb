@@ -150,18 +150,11 @@ class Author {
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
             return true;
+            }
         } else {
-            printf("Error: Category not found.\n");
             return false;
         }
-        } else {
-
-        //Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
-
-        return false;
     }
-}
 }
 
 
