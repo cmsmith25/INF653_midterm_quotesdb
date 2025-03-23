@@ -29,6 +29,5 @@ if($category->update()) {
 
 } else {
     echo json_encode(
-        array('message' => 'Category Not Updated')
-    );
+        array('message' => 'Missing Required Parameters'));
 }

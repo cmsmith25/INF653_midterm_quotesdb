@@ -30,6 +30,5 @@ if($author->update()) {
 );
 } else {
     echo json_encode(
-        array("message" => "Author Not Updated")
-    );
+        array("message" => "Missing Required Parameters"));
 }
