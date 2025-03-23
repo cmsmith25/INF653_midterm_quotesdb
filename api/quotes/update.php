@@ -30,7 +30,7 @@ $quote->author_id = $data->author_id;
 //Update quote
 if($quote->update()) {
     echo json_encode(
-    array('message' => 'Quote Updated')
+    array('message' => 'No Quotes Found')
 );
 } else {
     echo json_encode(
@@ -39,5 +39,5 @@ if($quote->update()) {
 }
 } else {
     echo json_encode(
-        array('message' => 'Imcomplete data provided'));
+        array('message' => 'Missing Required Parameters'));
 }
