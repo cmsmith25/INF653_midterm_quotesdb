@@ -24,7 +24,7 @@ $category->id = $data->id;
 
 //Delete category
 if($category->delete()) {
-    echo json_encode(array('id' => 'Category Deleted'));
+    echo json_encode(array('id' => 'Missing Required Parameters'));
 } else {
     echo json_encode(
         array('message' => 'Category Not Deleted'));
