@@ -30,7 +30,11 @@ $quote->author_id = $data->author_id;
 //Update quote
 if($quote->update()) {
     echo json_encode(
-    array('message' => 'No Quotes Found'));
+    array("id" => $quote_id,
+          "quote" => $quote_text,
+          "author_id" => $author_id,
+          "category_id" => $category_id,
+           "message" => "No Quotes Found"));
 
 } else {
     echo json_encode(

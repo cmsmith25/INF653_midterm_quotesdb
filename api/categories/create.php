@@ -23,8 +23,8 @@ $category->category = $data->category;
 
 //Create category
 if ($category->create()) {
-    echo json_encode(array('message' => 'Category Created'));
+    echo json_encode(array("id", "category" => "message" => "Category Created"));
 } else {
     echo json_encode(
-        array('message' => 'category_id Not Found'));
+        array("message" => "category_id Not Found"));
 }
