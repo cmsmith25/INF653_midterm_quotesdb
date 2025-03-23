@@ -18,11 +18,12 @@ $author = new Author($db);
 // Get raw POST data
 $data =json_decode(file_get_contents("php://input"));
 
+$author->id = $data->id;
 $author->author = $data->author;
 
 //Create author
 if($author->create()) {
-    echo json_encode(array('message' => 'Author Created'));
+    echo json_encode(array("id" => $author->id, "author" => $author->author));
 } else {
     echo json_encode(
         array('message' => 'Author Not Created'));
