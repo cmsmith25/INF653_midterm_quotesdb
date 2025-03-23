@@ -18,7 +18,7 @@ $author = new Author($db);
 // Get raw POST data
 $data =json_decode(file_get_contents("php://input"));
 
-$author->id = $data->id;
+
 $author->author = $data->author;
 
 //Create author
