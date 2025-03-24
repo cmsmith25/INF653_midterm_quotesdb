@@ -30,7 +30,7 @@ if (!isset($data->quote) && !isset($data->author_id) && !isset($data->category_i
 }
 
 
-    //Set ID to update
+    //Access Data
 $author_id = $data->author_id;
 $category_id = $data->category_id;
 $quote_text = $data->quote;
@@ -47,12 +47,12 @@ if (!$category->exists($category_id)) {
     exit();
 }
 
-if (isset($_GET['id'])) {
+/*if (isset($_GET['id'])) {
     $quote->id = $_GET['id'];
 } else {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
-}
+}*/
 
 //Update quote
 $quote->quote = $quote_text;
@@ -69,7 +69,7 @@ if($quote->update()) {
 
 } else {
     echo json_encode(
-        array('message' => 'No Quotes Found'));
+        array("message" => "No Quotes Found"));
 
     }
 
