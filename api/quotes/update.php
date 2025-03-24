@@ -24,7 +24,7 @@ $category = new Category($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //Ensure that all data requirements are available
-if (isset($data->quote) && isset($data->author_id) && isset($data->category_id)) {
+if (!isset($data->quote) && !isset($data->author_id) && !isset($data->category_id)) {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
@@ -65,7 +65,7 @@ if($quote->update()) {
     array("id" => $quote->id,
           "quote" => $quote->quote,
           "author_id" => $quote->author_id,
-          "category_id" => $quote_id->category_id));
+          "category_id" => $quote->category_id));
 
 } else {
     echo json_encode(
