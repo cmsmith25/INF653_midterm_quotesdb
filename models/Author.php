@@ -14,6 +14,27 @@ class Author {
         $this->conn = $db;
     }
 
+    public function exists($author_id) {
+        $query = 'SELECT id FROM ' . $this->table . '
+        WHERE id = :author_id LIMIT 1';
+
+        //Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        //Bind parameter
+        $stmt->bindParam(':author_id', $author_id);
+
+        //Execute query
+        $stmt->execute();
+
+        //Check if author exists
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     //Get Authors
     public function read() {
         //Create query
