@@ -33,8 +33,7 @@ if($quote->update()) {
     array("id" => $quote->id,
           "quote" => $quote->quote,
           "author_id" => $author_id->author_id,
-          "category_id" => $category_id->category_id,
-           "message" => "No Quotes Found"));
+          "category_id" => $category_id->category_id));
 
 } else {
     echo json_encode(

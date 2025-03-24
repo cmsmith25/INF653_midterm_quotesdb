@@ -25,7 +25,7 @@ $quote->author_id = $data->author_id;
 
 //Create quote
 if ($quote->create()) {
-    echo json_encode(array('message' => 'Quote Created'));
+    echo json_encode(array("id" => $quote->id, "quote" => $quote->quote, "author_id" => $author_id->author_id, "category_id" => $category_id->category_id));));
 } else {
     echo json_encode(
         array('message' => 'Missing Required Parameters'));
