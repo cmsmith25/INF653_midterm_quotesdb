@@ -7,6 +7,8 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 
 include_once '../../config/Database.php';
 include_once '../../models/Quote.php';
+include_once '../../models/Author.php';
+include_once '../../models/Category.php';
 
 
 //Instantiate DB & connect
@@ -15,29 +17,59 @@ $db = $database->connect();
 
 //Instantiate Author object
 $quote = new Quote($db);
+$author = new Author($db);
+$category = new Category($db);
 
 //Get raw author data
 $data = json_decode(file_get_contents("php://input"));
 
 //Ensure that all data requirements are available
-//if (isset($data->id) && isset($data->quote) && isset($data->author_id) && isset($data->category_id)) {
-//Set ID to update
-$quote->id = $data->id;
-$quote->quote = $data->quote;
-$quote->author_id = $data->author_id;
-$quote->category_id = $data->category_id;
+if (isset($data->quote) && isset($data->author_id) && isset($data->category_id)) {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+    exit();
+}
+
+
+    //Set ID to update
+$author_id = $data->author_id;
+$category_id = $data->category_id;
+$quote_text = $data->quote;
+
+//Check if author exists
+if (!$author->exists($author_id)) {
+    echo json_encode(array("message" => "author_id Not Found"));
+    exit();
+}
+
+//Check if category exists
+if (!$category->exists($category_id)) {
+    echo json_encode(array("message" => "category_id Not Found"));
+    exit();
+}
+
+//Update quote
+$quote->quote = $quote_text;
+$quote->author_id = $author_id;
+$quote->category_id = $category_id;
+
+if (isset($_GET['id'])) {
+    $quote->id = $_GET['id'];
+} else {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+    exit();
+}
 
 //Update quote
 if($quote->update()) {
     echo json_encode(
     array("id" => $quote->id,
           "quote" => $quote->quote,
-          "author_id" => $author_id->author_id,
-          "category_id" => $category_id->category_id));
+          "author_id" => $quote->author_id,
+          "category_id" => $quote_id->category_id));
 
 } else {
     echo json_encode(
-        array('message' => 'Missing Required Parameters'));
+        array('message' => 'Failed to update'));
 
     }
 
