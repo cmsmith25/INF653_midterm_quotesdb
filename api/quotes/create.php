@@ -46,10 +46,8 @@ if ($quote->create()) {
         "category_id" => $quote->category_id
     ));
     } else {
-        echo json_encode(array("message" => "Failed to create quote"));
-} else {
-    echo json_encode(array("message" => "Missing Required Parameters"));
-}
+        echo json_encode(array("message" => "Missing Required Parameters"));
+} 
 
 
 
