@@ -27,9 +27,9 @@ if (!$author->exists($data->author_id)) {
     exit();
 }
 
-if (!$category->($data->category_id)) {
-    echo json_encode(array("message" => "category_id Not Found"));
-    exit();
+    if (!$category->exists($data->category_id)) {
+        echo json_encode(array("message" => "category_id Not Found"));
+        exit();
 }
 
 //Set properties
