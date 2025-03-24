@@ -18,6 +18,10 @@ $author = new Author($db);
 // Get raw POST data
 $data =json_decode(file_get_contents("php://input"));
 
+if (!isset($data->author)) {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+    exit();
+}
 
 $author->author = $data->author;
 
