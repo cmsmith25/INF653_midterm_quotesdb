@@ -47,17 +47,17 @@ if (!$category->exists($category_id)) {
     exit();
 }
 
-//Update quote
-$quote->quote = $quote_text;
-$quote->author_id = $author_id;
-$quote->category_id = $category_id;
-
 if (isset($_GET['id'])) {
     $quote->id = $_GET['id'];
 } else {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
+
+//Update quote
+$quote->quote = $quote_text;
+$quote->author_id = $author_id;
+$quote->category_id = $category_id;
 
 //Update quote
 if($quote->update()) {
@@ -69,7 +69,7 @@ if($quote->update()) {
 
 } else {
     echo json_encode(
-        array('message' => 'Failed to update'));
+        array('message' => 'No Quotes Found'));
 
     }
 
