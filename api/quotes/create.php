@@ -20,8 +20,8 @@ $quote = new Quote($db);
 //Get raw quote data
 $data = json_decode(file_get_contents("php://input"));
     
-$author = new Author($db);
-$category = new Category($db);
+/*$author = new Author($db);
+$category = new Category($db);*/
 
 //Author check
 if (!$author->exists($data->author_id)) {
