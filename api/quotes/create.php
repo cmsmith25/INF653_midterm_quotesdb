@@ -20,8 +20,8 @@ $data = json_decode(file_get_contents("php://input"));
     
 //Set the properties of quote
 $quote->quote = $data->quote;
-$quote->category_id = $data->category_id;
 $quote->author_id = $data->author_id;
+$quote->category_id = $data->category_id;
 
 //Create quote
 if ($quote->create()) {
