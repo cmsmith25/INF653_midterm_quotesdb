@@ -18,7 +18,60 @@ $quote = new Quote($db);
 //Get raw quote data
 $data = json_decode(file_get_contents("php://input"));
     
-//Set the properties of quote
+$author = new Author($db);
+$category = new Category($db);
+
+//Author check
+if (!$author->exists($data->author_id)) {
+    echo json_encode(array("message" => "author_id Not Found"));
+    exit();
+}
+
+if (!$category->($data->category_id)) {
+    echo json_encode(array("message" => "category_id Not Found"));
+    exit();
+}
+
+//Set properties
+$quote->quote = $data->quote;
+$quote->author_id = $data->author_id;
+$quote->category_id = $data->category_id;
+
+//Quote creation
+if ($quote->create()) {
+    echo json_encode(array(
+        "id" => $quote->id,
+        "quote" => $quote->quote,
+        "author_id" => $quote->author_id,
+        "category_id" => $quote->category_id
+    ));
+    } else {
+        echo json_encode(array("message" => "Failed to create quote"));
+} else {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*//Set the properties of quote
 $quote->quote = $data->quote;
 $author->author_id = $data->author_id;//Attempted to change the object to see if that helped.
 $category->category_id = $data->category_id;
@@ -32,4 +85,4 @@ if($quote->create()) {
 } else {
     echo json_encode(
         array('message' => 'Missing Required Parameters'));
-}
+}*/
