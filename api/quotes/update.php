@@ -15,7 +15,7 @@ include_once '../../models/Category.php';
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate Author object
+//Instantiate objects
 $quote = new Quote($db);
 $author = new Author($db);
 $category = new Category($db);
@@ -24,13 +24,13 @@ $category = new Category($db);
 $data = json_decode(file_get_contents("php://input"));
 
 //Ensure that all data requirements are available
-if (!isset($data->quote) && !isset($data->author_id) && !isset($data->category_id)) {
+if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
 
 
-    //Access Data
+//Access Data
 $author_id = $data->author_id;
 $category_id = $data->category_id;
 $quote_text = $data->quote;
