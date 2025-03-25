@@ -34,6 +34,7 @@ if (!isset($data->quote) && !isset($data->author_id) && !isset($data->category_i
 $author_id = $data->author_id;
 $category_id = $data->category_id;
 $quote_text = $data->quote;
+$quote_id = $data->id;
 
 //Check if author exists
 if (!$author->exists($author_id)) {
@@ -55,9 +56,15 @@ if (!$category->exists($category_id)) {
 }*/
 
 //Update quote
+$quote->id = $quote_id;
 $quote->quote = $quote_text;
 $quote->author_id = $author_id;
 $quote->category_id = $category_id;
+
+if (!$quote->exists($quote->id)) {
+    echo json_encode(array("message" => "No Quotes Found"));
+    exit();
+}
 
 //Update quote
 if($quote->update()) {
@@ -69,7 +76,7 @@ if($quote->update()) {
 
 } else {
     echo json_encode(
-        array("message" => "No Quotes Found"));
+        array("message" => "Update Failed"));
 
     }
 
