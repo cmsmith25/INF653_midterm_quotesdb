@@ -20,21 +20,24 @@ $quote = new Quote($db);
 //Get raw quote data
 $data = json_decode(file_get_contents("php://input"));
 
+//Check for all required parameters
 if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
 
+//Instantiate Author and Category objects to complete checks
 $author = new Author($db);
 $category = new Category($db);
 
 
-//Author check
+//author_id check
 if (!$author->exists($data->author_id)) {
     echo json_encode(array("message" => "author_id Not Found"));
     exit();
 }
 
+//category_id check
     if (!$category->exists($data->category_id)) {
         echo json_encode(array("message" => "category_id Not Found"));
         exit();

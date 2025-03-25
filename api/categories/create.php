@@ -19,13 +19,13 @@ $category = new Category($db);
 //Get raw category data
 $data = json_decode(file_get_contents("php://input"));
 
+//Check for required parameters
 if (!isset($data->category)) {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
 
 //Set properties
-
 $category->category = $data->category;
 
 //Create category

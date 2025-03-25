@@ -15,14 +15,16 @@ $db = $database->connect();
 // Initializes the Author model
 $author = new Author($db);
 
-// Get raw POST data
+//Get raw POST data
 $data =json_decode(file_get_contents("php://input"));
 
+//Check for required parameters
 if (!isset($data->author)) {
     echo json_encode(array("message" => "Missing Required Parameters"));
     exit();
 }
 
+//Set properties
 $author->author = $data->author;
 
 //Create author
