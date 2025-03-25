@@ -18,7 +18,7 @@ class Quote {
         $this->conn = $db;
     }
 
-    //Exists function
+    //Exists function used in endpoints
     public function exists($quote_id) {
         $query = 'SELECT id FROM ' . $this->table . '
         WHERE id = :quote_id LIMIT 1';
@@ -32,7 +32,7 @@ class Quote {
         //Execute query
         $stmt->execute();
 
-        //Check if author exists
+        //Check if any row is returned
         if ($stmt->rowCount() > 0) {
             return true;
         }
@@ -40,7 +40,7 @@ class Quote {
         return false;
     }
 
-    //Get Quotes
+    //Get all quotes
     public function read() {
         //Create query
         $query = 'SELECT
@@ -110,8 +110,8 @@ public function read_single() {
 }
 
 
-    //Create quote
-    public function create() {
+//Create quote
+public function create() {
     
     //Create query
     $query = 'INSERT INTO ' . $this->table . ' (quote, category_id, author_id)
@@ -120,7 +120,7 @@ public function read_single() {
     //Prepare statment
      $stmt = $this->conn->prepare($query);
 
-     
+    //Clean data 
     $this->quote = htmlspecialchars(strip_tags($this->quote));
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
     $this->author_id = htmlspecialchars(strip_tags($this->author_id));
@@ -144,37 +144,37 @@ public function read_single() {
 
     }
 
-    //Update quote
-    public function update() {
-        //Check if category_id and author_id are integers
-        if (!is_int($this->category_id) || !is_int($this->author_id)) {
-            printf("Error: Invalid category_id or author_id.\n");
-            return false;
-        }
+//Update quote
+public function update() {
+    //Check if category_id and author_id are integers
+    if (!is_int($this->category_id) || !is_int($this->author_id)) {
+        printf("Error: Invalid category_id or author_id.\n");
+        return false;
+    }
 
     //Clean data
      $this->quote = htmlspecialchars(strip_tags($this->quote));
      $this->category_id = htmlspecialchars(strip_tags($this->category_id));
      $this->author_id = htmlspecialchars(strip_tags($this->author_id));
      
-        //create query
+    //create query
         $query = 'UPDATE ' . $this->table . '
         SET
-         quote = :quote,
-         category_id = :category_id,
-         author_id = :author_id
-         WHERE
-            id = :id';
+        quote = :quote,
+        category_id = :category_id,
+        author_id = :author_id
+        WHERE
+        id = :id';
 
     //Prepare statement
     $stmt = $this->conn->prepare($query);
      
  
-     //Bind data
-     $stmt->bindParam(':id', $this->id);
-     $stmt->bindParam(':quote', $this->quote);
-     $stmt->bindParam(':category_id', $this->category_id);
-     $stmt->bindParam(':author_id', $this->author_id);
+    //Bind data
+    $stmt->bindParam(':id', $this->id);
+    $stmt->bindParam(':quote', $this->quote);
+    $stmt->bindParam(':category_id', $this->category_id);
+    $stmt->bindParam(':author_id', $this->author_id);
 
 
     //Execute query
@@ -189,25 +189,26 @@ public function read_single() {
 
     }
 
-    //Delete quote
-    public function delete() {
-        //Create query
-        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+//Delete quote
+public function delete() {
+        
+    //Create query
+    $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
 
-        //Prepare statement
-        $stmt = $this->conn->prepare($query);
+    //Prepare statement
+    $stmt = $this->conn->prepare($query);
 
-        //Clean data
-        $this->id = htmlspecialchars(strip_tags($this->id));
+    //Clean data
+    $this->id = htmlspecialchars(strip_tags($this->id));
 
-        //Bind data
-        $stmt->bindParam(':id', $this->id);
+    //Bind data
+    $stmt->bindParam(':id', $this->id);
 
-        //Execute query
-        if ($stmt->execute()) {
-            if ($stmt->rowCount() > 0) {
+    //Execute query
+    if ($stmt->execute()) {
+        if ($stmt->rowCount() > 0) {
             return true;
-            }
+        }
         } else {
             return false;
     }

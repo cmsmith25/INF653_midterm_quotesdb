@@ -14,6 +14,7 @@ class Category {
         $this->conn = $db;
     }
 
+    //Exists function used in endpoints
     public function exists($category_id) {
         $query = 'SELECT id FROM ' . $this->table . '
         WHERE id = :category_id LIMIT 1';
@@ -35,7 +36,7 @@ class Category {
         return false;
     }
 
-    //Get categories
+    //Get all categories
     public function read() {
         //Create query
         $query = 'SELECT
@@ -46,19 +47,19 @@ class Category {
             ORDER BY
             c.id DESC';
             
-    //Prepare statement
-   $stmt = $this->conn->prepare($query);
+            //Prepare statement
+            $stmt = $this->conn->prepare($query);
 
-    //Execute query
-   $stmt->execute();
+            //Execute query
+            $stmt->execute();
 
-   return $stmt;
-}
+            return $stmt;
+        }
 
     //Get a single category
     public function read_single() {
-        //Create query
-         $query = 'SELECT
+    //Create query
+    $query = 'SELECT
         c.id,
         c.category
         FROM
@@ -94,30 +95,32 @@ class Category {
 
     //Create category
     public function create() {
+        
         //Create query
         $query = 'INSERT INTO ' . $this->table . '
         (category) VALUES (:category)';
-            
+                
         //Prepare statment
         $stmt = $this->conn->prepare($query);
 
         //Clean data
         $this->category = htmlspecialchars(strip_tags($this->category));
-    
+        
         //Bind data
         $stmt->bindParam(':category', $this->category);
-    
+        
         //Execute query
         if ($stmt->execute()) {
             return true;
         } else {
+        
         //Print error if something goes wrong
         printf("Error: %s.\n", $stmt->error);
 
         return false;
 
+        }
     }
-}
 
 
     //Update category
@@ -127,7 +130,7 @@ class Category {
         SET
             category = :category
         WHERE
-          id = :id';
+            id = :id';
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -135,23 +138,23 @@ class Category {
         //Clean data
         $this->id = htmlspecialchars(strip_tags($this->id));
         $this->category = htmlspecialchars(strip_tags($this->category));
-     
+        
         //Bind data
         $stmt->bindParam(':id', $this->id);
         $stmt->bindParam(':category', $this->category);
-     
-       //Execute query
+        
+        //Execute query
         if ($stmt->execute()) {
             return true;
-     } else {
+        } else {
 
         //Print error if something goes wrong
         printf("Error: %s.\n", $stmt->error);
 
         return false;
 
+        }
     }
-}
 
     //Delete category
     public function delete() {
@@ -163,7 +166,7 @@ class Category {
 
         //Clean data
         $this->id = htmlspecialchars(strip_tags($this->id));
-        
+            
         //Bind data
         $stmt->bindParam(':id', $this->id);
 
@@ -174,9 +177,9 @@ class Category {
             }
         } else {
             return false;
+            }
         }
     }
-}
 
     
 

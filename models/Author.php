@@ -14,6 +14,7 @@ class Author {
         $this->conn = $db;
     }
 
+    //Exists function used in endpoints
     public function exists($author_id) {
         $query = 'SELECT id FROM ' . $this->table . '
         WHERE id = :author_id LIMIT 1';
@@ -35,7 +36,7 @@ class Author {
         return false;
     }
 
-    //Get Authors
+    //Get all Authors
     public function read() {
         //Create query
         $query = 'SELECT
