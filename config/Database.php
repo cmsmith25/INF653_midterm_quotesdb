@@ -1,5 +1,6 @@
 <?php
     
+    //Define Database class and store database connection details
     class Database {
         private $conn;
         private $host;
@@ -8,6 +9,7 @@
         private $username;
         private $password;
 
+        //Construct database connection parameters and environment variables
         public function __construct() {
             $this->username = getenv('USERNAME');
             $this->password = getenv('PASSWORD');
@@ -15,6 +17,7 @@
             $this->host = getenv('HOST');
         }
 
+        //Method to establish a connection with database
         public function connect() {
             if ($this->conn) {
                 return $this->conn;
@@ -22,7 +25,7 @@
 
                 $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbname};";
 
-
+            //Try to establish connection to DB using PDO       
             try{
                 $this->conn = new PDO($dsn, $this->username, $this->password);
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

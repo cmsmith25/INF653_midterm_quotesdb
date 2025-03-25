@@ -30,7 +30,7 @@ if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_i
 }
 
 
-//Access Data
+//Access Data 
 $author_id = $data->author_id;
 $category_id = $data->category_id;
 $quote_text = $data->quote;
@@ -54,12 +54,13 @@ $quote->quote = $quote_text;
 $quote->author_id = $author_id;
 $quote->category_id = $category_id;
 
+//Check if quote exists
 if (!$quote->exists($quote->id)) {
     echo json_encode(array("message" => "No Quotes Found"));
     exit();
 }
 
-//Update quote
+//Call update method
 if($quote->update()) {
     echo json_encode(
     array("id" => $quote->id,

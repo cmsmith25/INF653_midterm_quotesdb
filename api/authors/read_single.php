@@ -20,12 +20,13 @@ $author = new Author($db);
 //Get ID
 $id = isset($_GET['id']) ? $_GET['id'] : die(json_encode(["message" => "Missing ID Parameter"]));
 
+//Set ID for Author object
 $author->id = $id;
 
-//Get author
+//Calls read_single method
 $result = $author->read_single();
 
-
+//Check if result contains data
 if ($result) {
     echo json_encode($result);
 } else {

@@ -25,9 +25,11 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
  if($num > 0) {
     $authors_arr = array();
 
+    //Loop through results and fetch author data
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
+        //Create array for author
         $author_item = array(
             'id' => $id,
             'author' => $author

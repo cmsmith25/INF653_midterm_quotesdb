@@ -18,10 +18,13 @@ $quote = new Quote($db);
 //Get ID
 $id = isset($_GET['id']) ? $_GET['id'] : die(json_encode(["message" => "Missing ID parameter"]));
 
+//Set ID for quote object
 $quote->id = $id;
 
+//Calls read_single method
 $result = $quote->read_single();
 
+//Check if result contains data
 if($result) {
     echo json_encode($result);
 } else {

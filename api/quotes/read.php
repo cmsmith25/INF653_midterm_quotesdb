@@ -22,9 +22,11 @@ include_once '../../models/Quote.php';
  if ($stmt->rowCount() >0) {
     $quotes_arr = array();
     
+    //Loop through results and fetch quote data
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
+        //Create array for quote
         $quote_item = array(
             'id' => $id,
             'quote' => $quote,
@@ -36,6 +38,7 @@ include_once '../../models/Quote.php';
         array_push($quotes_arr, $quote_item);
         }
         
+        //Turn to JSON
         echo json_encode($quotes_arr);
         
 

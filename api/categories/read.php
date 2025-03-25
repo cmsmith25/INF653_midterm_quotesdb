@@ -26,9 +26,11 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
  if($num > 0) {
     $categories_arr = array();
 
+    //Loop through results and fetch category data
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
+        //Create array for category
         $category_item = array(
             'id' => $id,
             'category' => $category

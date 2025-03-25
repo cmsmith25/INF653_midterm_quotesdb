@@ -20,11 +20,13 @@ $category = new Category($db);
 //Get ID
 $id = isset($_GET['id']) ? $_GET['id'] : die(json_encode(["message" => "Missing ID Parameter"]));
 
+//Set ID for category object
 $category->id = $id;
 
-//Get category
+//Calls read_single method
 $result = $category->read_single();
 
+//Check if result contains data
 if ($result) {
     echo json_encode($result);
 } else {
