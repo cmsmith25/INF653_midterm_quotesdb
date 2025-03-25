@@ -18,6 +18,28 @@ class Quote {
         $this->conn = $db;
     }
 
+    //Exists function
+    public function exists($quote_id) {
+        $query = 'SELECT id FROM ' . $this->table . '
+        WHERE id = :quote_id LIMIT 1';
+
+        //Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        //Bind parameter
+        $stmt->bindParam(':quote_id', $quote_id);
+
+        //Execute query
+        $stmt->execute();
+
+        //Check if author exists
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     //Get Quotes
     public function read() {
         //Create query
