@@ -19,14 +19,23 @@ $author = new Author($db);
 //Get raw author data
 $data = json_decode(file_get_contents("php://input"));
 
+if (!isset($data->author) || empty($data->author)) {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+    exit();
+}
+
 //Set ID to update
 $author->id = $data->id;
-$author->author = $data->author;
+
+//Clean author name
+$author_name = strip_tags($author_name ?? '');
 
 //Update author
+$author->author = $author_name;
+
 if($author->update()) {
     echo json_encode(array("id" => $author->id, "author" => $author->author));
 } else {
-    echo json_encode(array('message' => 'Missing Required Parameters'));
+    echo json_encode(array('message' => 'Failed to update author'));
 }
 

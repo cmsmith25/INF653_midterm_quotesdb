@@ -48,13 +48,6 @@ if (!$category->exists($category_id)) {
     exit();
 }
 
-/*if (isset($_GET['id'])) {
-    $quote->id = $_GET['id'];
-} else {
-    echo json_encode(array("message" => "Missing Required Parameters"));
-    exit();
-}*/
-
 //Update quote
 $quote->id = $quote_id;
 $quote->quote = $quote_text;
