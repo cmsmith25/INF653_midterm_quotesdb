@@ -19,14 +19,24 @@ $category = new Category($db);
 //Get raw category data
 $data = json_decode(file_get_contents("php://input"));
 
+if (!isset($data->category) || empty($data->category)) {
+    echo json_encode(array("message" => "Missing Required Parameters"));
+    exit();
+}
+
 //Set ID to update
 $category->id = $data->id;
-$category->category = $data->category;
+
+//Clean category name
+$category_name = strip_tags($category_name ?? '');
 
 //Update category
+$category->category = $category_name;
+
+
 if($category->update()) {
     echo json_encode(array("id" => $category->id, "category" => $category->category));
 
 } else {
-    echo json_encode(array("message" => "Missing Required Parameters"));
+    echo json_encode(array("message" => "Failed to update category"));
 }
